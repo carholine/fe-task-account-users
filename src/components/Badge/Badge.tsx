@@ -17,11 +17,11 @@ interface Props {
 const Badge: React.FC<Props> = ({ variant = BadgeVariant.DEFAULT, label }) => {
     if (!label) return false;
     return (
-        <div
+        <span
             className={`${variantColors[variant]} w-fit text-xs py-[3px] px-2 rounded font-medium`}
         >
             {label}
-        </div>
+        </span>
     );
 };
 

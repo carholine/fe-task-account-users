@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Badge from './Badge'; // Adjust the import based on your file structure
+import Badge from './Badge';
 import { BadgeVariant } from '../../types/types';
 
 describe('Badge Component', () => {

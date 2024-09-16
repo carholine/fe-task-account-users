@@ -6,11 +6,16 @@ export default {
   ],
   theme: {
     fontSize: {
-      xs: ['0.75rem', '1.1rem']
+      xs: ['12px', '18px'],
+      sm: ['14px', '21px']
     },
     extend: {
+      boxShadow: {
+        'xs': '0px 1px 2px 0px rgba(45, 55, 72, 0.08)',
+      },
       colors: {
         c: {
+          border: '#E2E8F0',
           badge: {
             blue: {
               50: '#C8E7F9',
@@ -43,7 +48,8 @@ export default {
           },
           accent: '#F7FAFC',
           btn: {
-            primary: '#475DE5'
+            primary: '#475DE5',
+            icon: 'rgba(160, 174, 192, 1)'
           },
           shadow: 'rgba(45, 55, 72, 0.08)'
         }
