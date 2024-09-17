@@ -11,10 +11,18 @@ export default {
     },
     extend: {
       boxShadow: {
-        'xs': '0px 1px 2px 0px rgba(45, 55, 72, 0.08)',
+        'xs': '0px 1px 2px 0px rgba(45, 55, 72, 0.08)'
       },
       colors: {
         c: {
+          blue: {
+            100: '#475DE5',
+            200: '#3546B0',
+            300: '#2A388C'
+          },
+          gray: {
+            50: '#CBD5E0'
+          },
           border: '#E2E8F0',
           badge: {
             blue: {
@@ -48,7 +56,6 @@ export default {
           },
           accent: '#F7FAFC',
           btn: {
-            primary: '#475DE5',
             icon: 'rgba(160, 174, 192, 1)'
           },
           shadow: 'rgba(45, 55, 72, 0.08)'

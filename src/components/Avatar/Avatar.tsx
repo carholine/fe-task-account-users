@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface AvatarProps {
+interface Props {
     src: string;
     alt?: string;
     ariaLabel?: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({
+const Avatar: React.FC<Props> = ({
     src,
     alt = '',
     ariaLabel = 'User avatar',
