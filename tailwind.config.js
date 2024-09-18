@@ -10,6 +10,9 @@ export default {
       sm: ['14px', '21px']
     },
     extend: {
+      gridTemplateColumns: {
+        '3col': '1fr 149px 110px',
+      },
       boxShadow: {
         'xs': '0px 1px 2px 0px rgba(45, 55, 72, 0.08)'
       },
@@ -45,6 +48,7 @@ export default {
           text: {
             primary: '#1A202C',
             secondary: '#718096',
+            hover: '#2D3748',
             gray: {
               50: '#A0AEC0',
               100: '#4A5568'
@@ -53,10 +57,6 @@ export default {
           bg: {
             main: '#EDF2F7',
             gray: '#F7FAFC'
-          },
-          accent: '#F7FAFC',
-          btn: {
-            icon: 'rgba(160, 174, 192, 1)'
           },
           shadow: 'rgba(45, 55, 72, 0.08)'
         }
