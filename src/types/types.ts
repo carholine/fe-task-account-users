@@ -15,3 +15,11 @@ export enum ButtonSize {
     SM = 'sm',
     MD = 'md',
 }
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    avatar?: string;
+    role: string;
+}
