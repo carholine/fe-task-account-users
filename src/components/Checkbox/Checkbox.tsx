@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CheckIcon from '../../assets/check.svg?react';
 
 interface Props {
-    checked?: boolean;
-    onChange?: (checked: boolean) => void;
+    checked: boolean;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC<Props> = ({ checked = false, onChange }) => {
-    const [isChecked, setIsChecked] = useState(checked);
-
+const Checkbox: React.FC<Props> = ({ checked, onChange }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newChecked = event.target.checked;
-        setIsChecked(newChecked);
-        if (onChange) {
-            onChange(newChecked);
-        }
+        if (onChange) onChange(event);
     };
 
     return (
-        <label className="relative inline-flex items-center cursor-pointer">
+        <div className="relative inline-flex items-center cursor-pointer">
             <input
                 type="checkbox"
-                checked={isChecked}
+                checked={checked}
                 onChange={handleChange}
-                className="h-4 w-4 rounded border border-c-gray-300 checked:bg-c-blue-100 checked:border-c-blue-100 transition duration-150 ease-in-out appearance-none"
-                aria-checked={isChecked}
+                className="cursor-pointer h-4 w-4 rounded border border-c-gray-300 bg-white checked:bg-c-blue-100 checked:border-c-blue-100 transition duration-150 ease-in-out appearance-none"
+                aria-checked={checked}
+                aria-label="Checkbox"
+                role="checkbox"
             />
             <CheckIcon
-                className={`h-4 w-4 absolute inset-0 fill-white transition duration-150 ease-in-out ${isChecked ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute inset-0 flex items-center justify-center pointer-events-none h-4 w-4 fill-white transition duration-150 ease-in-out ${checked ? 'opacity-100' : 'opacity-0'}`}
                 aria-hidden="true"
             />
-        </label>
+        </div>
     );
 };
 
