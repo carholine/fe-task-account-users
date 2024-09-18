@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Button from './Button';
-import { ButtonSize, ButtonVariant } from '../../types/types';
+import { ButtonSize, ButtonVariant } from '../../../types/types';
 
 const MockIcon = () => <svg data-testid="mock-icon" />;
 
