@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  }
+    html {
+        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    }
+}
+
+@layer components {
+    .user-list-item {
+        @apply pl-3 pr-6 flex items-center grid grid-cols-3col box-border border-l-transparent border-l-4;
+    }
+  
 }

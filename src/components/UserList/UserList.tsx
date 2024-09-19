@@ -1,46 +1,16 @@
 import React from 'react';
-import { FixedSizeList as List, ListChildComponentProps } from 'react-window';
+import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import UserRow from '../UserRow/UserRow';
-import { User } from '../../types/types';
 import Spinner from '../Spinner/Spinner';
+import { ROW_GAP, ROW_HEIGHT } from './constants';
+import { RowContainer, RowData } from './UserListRowContainer';
+import { RowsContainer, UserListContext } from './UserListRowsContainer';
 
-interface UserListProps {
-    users: User[];
-    selectedUserIds: Set<number>;
-    onClickUserRow: (id: number) => void;
+type UserListProps = {
     isLoading?: boolean;
     error?: boolean;
-}
-
-const ROW_HEIGHT = 64;
-const ROW_GAP = 4;
-
-interface RowData {
-    users: User[];
-    selectedUserIds: Set<number>;
-    onClickUserRow: (id: number) => void;
-}
-
-const Row: React.FC<ListChildComponentProps<RowData>> = React.memo(
-    function Row({ index, style, data }: ListChildComponentProps<RowData>) {
-        const { users, selectedUserIds, onClickUserRow } = data;
-        const user = users[index];
-        const isSelected = selectedUserIds.has(user.id);
-
-        return (
-            <div style={{ ...style, paddingBottom: ROW_GAP }}>
-                <UserRow
-                    user={user}
-                    isSelected={isSelected}
-                    onClick={onClickUserRow}
-                />
-            </div>
-        );
-    }
-);
-
-Row.displayName = 'Row';
+    onCheckAllUsers: () => void;
+} & RowData;
 
 const renderLoadingState = () => (
     <div className="h-full flex items-center justify-center">
@@ -68,26 +38,34 @@ const UserList: React.FC<UserListProps> = ({
     users,
     selectedUserIds,
     onClickUserRow,
+    onCheckAllUsers,
 }) => {
     if (isLoading) return renderLoadingState();
     if (error) return renderErrorState();
     if (users.length === 0) return renderEmptyState();
 
+    const areAllUsersSelected = selectedUserIds.size === users.length;
+
     return (
-        <AutoSizer disableWidth>
-            {({ height }) => (
-                <List
-                    height={height}
-                    itemCount={users.length}
-                    itemSize={ROW_HEIGHT + ROW_GAP}
-                    width="100%"
-                    itemData={{ users, selectedUserIds, onClickUserRow }}
-                    itemKey={(index) => users[index].id} // Added to prevent the rows from re-rendering on prop change
-                >
-                    {Row}
-                </List>
-            )}
-        </AutoSizer>
+        <UserListContext.Provider //Context needs to be used to keep the RowsContainer from being re-rendered with the children
+            value={{ areAllUsersSelected, onCheckAllUsers }}
+        >
+            <AutoSizer disableWidth>
+                {({ height }) => (
+                    <List
+                        height={height}
+                        itemCount={users.length}
+                        itemSize={ROW_HEIGHT + ROW_GAP}
+                        width="100%"
+                        itemData={{ users, selectedUserIds, onClickUserRow }}
+                        itemKey={(index) => users[index].id} // Added to avoid user rows being re-rendered on selection
+                        innerElementType={RowsContainer}
+                    >
+                        {RowContainer}
+                    </List>
+                )}
+            </AutoSizer>
+        </UserListContext.Provider>
     );
 };
 

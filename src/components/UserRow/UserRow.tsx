@@ -109,11 +109,10 @@ const UserRow: React.FC<Props> = ({
             onClick={handleRowClick}
             data-testid={dataTestIds?.row}
             className={`
-                h-16 pl-3 pr-6 
-                flex items-center box-border group
-                grid grid-cols-3col
+                user-list-item
+                h-16 group
                 transition-colors duration-200 ease-in-out
-                rounded border-l-4
+                rounded
                 cursor-pointer
                 ${isSelected ? 'bg-c-bg-gray border-l-c-blue-100' : 'hover:bg-c-bg-gray border-l-transparent'}`}
         >

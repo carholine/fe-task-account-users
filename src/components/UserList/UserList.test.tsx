@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import UserList from './UserList';
 import { User } from '../../types/types';
@@ -16,6 +16,7 @@ const mockUsers: User[] = [
 
 const selectedUserIds = new Set<number>([1]);
 const onClickUserRow = vi.fn();
+const onCheckAllUsers = vi.fn(); // Added for context
 
 describe('UserList component', () => {
     beforeAll(() => {
@@ -33,8 +34,10 @@ describe('UserList component', () => {
                 users={mockUsers}
                 selectedUserIds={selectedUserIds}
                 onClickUserRow={onClickUserRow}
+                onCheckAllUsers={onCheckAllUsers}
             />
         );
+
         expect(screen.getByText('John Doe')).toBeInTheDocument();
         expect(screen.getByText('Jane Doe')).toBeInTheDocument();
         expect(screen.getByText('Alice Smith')).toBeInTheDocument();
@@ -46,6 +49,7 @@ describe('UserList component', () => {
                 users={[]}
                 selectedUserIds={new Set<number>()}
                 onClickUserRow={onClickUserRow}
+                onCheckAllUsers={onCheckAllUsers}
                 isLoading={true}
             />
         );
@@ -58,6 +62,7 @@ describe('UserList component', () => {
                 users={[]}
                 selectedUserIds={new Set<number>()}
                 onClickUserRow={onClickUserRow}
+                onCheckAllUsers={onCheckAllUsers}
                 error={true}
             />
         );
@@ -72,8 +77,30 @@ describe('UserList component', () => {
                 users={[]}
                 selectedUserIds={new Set<number>()}
                 onClickUserRow={onClickUserRow}
+                onCheckAllUsers={onCheckAllUsers}
             />
         );
         expect(screen.getByText('No users')).toBeInTheDocument();
+    });
+
+    it('calls onCheckAllUsers when the header checkbox is clicked', () => {
+        render(
+            <UserList
+                users={mockUsers}
+                selectedUserIds={selectedUserIds}
+                onClickUserRow={onClickUserRow}
+                onCheckAllUsers={onCheckAllUsers}
+            />
+        );
+
+        const header = screen.getByText(/User/i).closest('.user-list-item');
+        const headerCheckbox = header?.querySelector('input[type="checkbox"]');
+
+        if (headerCheckbox) {
+            fireEvent.click(headerCheckbox);
+            expect(onCheckAllUsers).toHaveBeenCalledTimes(1);
+        } else {
+            throw new Error('Checkbox not found');
+        }
     });
 });

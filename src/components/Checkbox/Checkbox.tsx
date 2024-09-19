@@ -1,12 +1,12 @@
 import React from 'react';
 import CheckIcon from '../../assets/check.svg?react';
 
-interface Props {
+export interface CheckboxProps {
     checked: boolean;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC<Props> = ({ checked, onChange }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) onChange(event);
     };
