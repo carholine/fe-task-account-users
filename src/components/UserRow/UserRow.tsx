@@ -39,60 +39,69 @@ const UserRow: React.FC<Props> = ({
     onClick,
     dataTestIds,
 }) => {
-    const handleRowClick = () => {
+    const handleRowClick = React.useCallback(() => {
         onClick(user.id);
-    };
+    }, [onClick, user.id]);
 
-    const renderNameColumn = () => (
-        <div
-            className="min-w-16 gap-3 flex items-center overflow-hidden"
-            data-testid={dataTestIds?.nameColumn}
-        >
-            <Checkbox checked={isSelected} />
-            {!!user.avatar && <Avatar src={user.avatar} alt={user.name} />}
-            <div className="flex-1 truncate">
-                <div className="font-medium tracking-[-0.025em] truncate group-hover:text-c-text-hover">
-                    {user.name}
-                </div>
-                <div className="text-c-text-secondary text-sm tracking-[0.04em] truncate">
-                    {user.email}
+    const renderNameColumn = React.useMemo(
+        () => (
+            <div
+                className="min-w-16 gap-3 flex items-center overflow-hidden"
+                data-testid={dataTestIds?.nameColumn}
+            >
+                <Checkbox checked={isSelected} />
+                {!!user.avatar && <Avatar src={user.avatar} alt={user.name} />}
+                <div className="flex-1 truncate">
+                    <div className="font-medium tracking-[-0.025em] truncate group-hover:text-c-text-hover">
+                        {user.name}
+                    </div>
+                    <div className="text-c-text-secondary text-sm tracking-[0.04em] truncate">
+                        {user.email}
+                    </div>
                 </div>
             </div>
-        </div>
+        ),
+        [user, isSelected, dataTestIds]
     );
 
-    const renderPermissionsColumn = () => (
-        <div
-            className="flex items-center justify-start truncate"
-            data-testid={dataTestIds?.permissionsColumn}
-        >
-            <Badge
-                variant={roleColors[user.role] || BadgeVariant.DEFAULT}
-                label={formatRole(user.role)}
-            />
-        </div>
+    const renderPermissionsColumn = React.useMemo(
+        () => (
+            <div
+                className="flex items-center justify-start truncate"
+                data-testid={dataTestIds?.permissionsColumn}
+            >
+                <Badge
+                    variant={roleColors[user.role] || BadgeVariant.DEFAULT}
+                    label={formatRole(user.role)}
+                />
+            </div>
+        ),
+        [user.role, dataTestIds]
     );
 
-    const renderActionsColumn = () => (
-        <div
-            className="flex items-center justify-end gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-            data-testid={dataTestIds?.actionsColumn}
-        >
-            <EditButton
-                size={ButtonSize.SM}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    console.log('Edit user');
-                }}
-            />
-            <DeleteButton
-                size={ButtonSize.SM}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    console.log('Delete user');
-                }}
-            />
-        </div>
+    const renderActionsColumn = React.useMemo(
+        () => (
+            <div
+                className="flex items-center justify-end gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+                data-testid={dataTestIds?.actionsColumn}
+            >
+                <EditButton
+                    size={ButtonSize.SM}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Edit user');
+                    }}
+                />
+                <DeleteButton
+                    size={ButtonSize.SM}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Delete user');
+                    }}
+                />
+            </div>
+        ),
+        [dataTestIds]
     );
 
     return (
@@ -108,11 +117,11 @@ const UserRow: React.FC<Props> = ({
                 cursor-pointer
                 ${isSelected ? 'bg-c-bg-gray border-l-c-blue-100' : 'hover:bg-c-bg-gray border-l-transparent'}`}
         >
-            {renderNameColumn()}
-            {renderPermissionsColumn()}
-            {renderActionsColumn()}
+            {renderNameColumn}
+            {renderPermissionsColumn}
+            {renderActionsColumn}
         </div>
     );
 };
 
-export default UserRow;
+export default React.memo(UserRow);
