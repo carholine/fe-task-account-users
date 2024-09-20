@@ -1,10 +1,13 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/300.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
     html {
-        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
     }
 }
 
@@ -12,5 +15,27 @@
     .user-list-item {
         @apply pl-3 pr-6 flex items-center grid grid-cols-3col box-border border-l-transparent border-l-4;
     }
-  
+}
+
+@layer utilities {
+    .no-scrollbars{
+        scrollbar-width: none;
+        scrollbar-color: transparent transparent;
+      
+        &::-webkit-scrollbar {
+          width: 1px;
+        }
+      
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+      
+        &::-webkit-scrollbar-thumb {
+          background-color: transparent;
+        }
+      }
+    
+      .no-scrollbars::-webkit-scrollbar { 
+        display: none;
+    }
 }

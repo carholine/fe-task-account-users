@@ -52,10 +52,10 @@ const UserRow: React.FC<Props> = ({
                 <Checkbox checked={isSelected} />
                 {!!user.avatar && <Avatar src={user.avatar} alt={user.name} />}
                 <div className="flex-1 truncate">
-                    <div className="font-medium tracking-[-0.025em] truncate group-hover:text-c-text-hover">
+                    <div className="font-medium text-sm truncate group-hover:text-c-text-hover">
                         {user.name}
                     </div>
-                    <div className="text-c-text-secondary text-sm tracking-[0.04em] truncate">
+                    <div className="font-light text-c-text-secondary text-sm truncate">
                         {user.email}
                     </div>
                 </div>

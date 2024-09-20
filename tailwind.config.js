@@ -7,7 +7,9 @@ export default {
   theme: {
     fontSize: {
       xs: ['12px', '18px'],
-      sm: ['14px', '21px']
+      sm: ['14px', '21px'],
+      l: ['16px', '24px'],
+      xl: ['18px', '27px']
     },
     extend: {
       gridTemplateColumns: {

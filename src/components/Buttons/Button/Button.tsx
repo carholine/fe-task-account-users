@@ -50,7 +50,7 @@ const Button: React.FC<ButtonProps> = ({
                     role="presentation"
                 />
             )}
-            {label && <span className="px-2 tracking-[0.04em]">{label}</span>}
+            {label && <span className="px-2">{label}</span>}
         </button>
     );
 };

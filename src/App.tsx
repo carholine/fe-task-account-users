@@ -1,8 +1,13 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AccountUsers from './views/AccountUsers/AccountUsers';
+
+const queryClient = new QueryClient();
+
 function App() {
     return (
-        <>
-            <h1>Account Users</h1>
-        </>
+        <QueryClientProvider client={queryClient}>
+            <AccountUsers />
+        </QueryClientProvider>
     );
 }
 

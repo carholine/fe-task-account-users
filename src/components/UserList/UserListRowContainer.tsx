@@ -4,7 +4,7 @@ import { ListChildComponentProps } from 'react-window';
 import { HEADER_HEIGHT, ROW_GAP } from './constants';
 import UserRow from '../UserRow/UserRow';
 
-export interface RowData {
+export interface RowContainerData {
     users: User[];
     selectedUserIds: Set<number>;
     onClickUserRow: (id: number) => void;
@@ -13,12 +13,12 @@ export interface RowData {
 /**
  * This component is used for styling the UserRow for when it's used within the list.
  */
-export const RowContainer: React.FC<ListChildComponentProps<RowData>> =
+export const RowContainer: React.FC<ListChildComponentProps<RowContainerData>> =
     React.memo(function RowContainer({
         index,
         style,
         data,
-    }: ListChildComponentProps<RowData>) {
+    }: ListChildComponentProps<RowContainerData>) {
         const { users, selectedUserIds, onClickUserRow } = data;
         const user = users[index];
         const isSelected = selectedUserIds.has(user.id);

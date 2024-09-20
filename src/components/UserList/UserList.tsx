@@ -3,23 +3,23 @@ import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import Spinner from '../Spinner/Spinner';
 import { ROW_GAP, ROW_HEIGHT } from './constants';
-import { RowContainer, RowData } from './UserListRowContainer';
+import { RowContainer, RowContainerData } from './UserListRowContainer';
 import { RowsContainer, UserListContext } from './UserListRowsContainer';
 
-type UserListProps = {
+export type UserListProps = {
     isLoading?: boolean;
     error?: boolean;
     onCheckAllUsers: () => void;
-} & RowData;
+} & RowContainerData;
 
 const renderLoadingState = () => (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex-1 flex items-center justify-center">
         <Spinner />
     </div>
 );
 
 const renderErrorState = () => (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex-1 flex items-center justify-center">
         <p className="text-red-500">
             Something went wrong. Please try again later.
         </p>
@@ -27,7 +27,7 @@ const renderErrorState = () => (
 );
 
 const renderEmptyState = () => (
-    <div className="h-full flex items-center justify-center">
+    <div className="flex-1 flex items-center justify-center">
         <p className="text-c-text-gray-50">No users</p>
     </div>
 );
@@ -47,24 +47,31 @@ const UserList: React.FC<UserListProps> = ({
     const areAllUsersSelected = selectedUserIds.size === users.length;
 
     return (
-        <UserListContext.Provider //Context needs to be used to keep the RowsContainer from being re-rendered with the children
+        <UserListContext.Provider
             value={{ areAllUsersSelected, onCheckAllUsers }}
         >
-            <AutoSizer disableWidth>
-                {({ height }) => (
-                    <List
-                        height={height}
-                        itemCount={users.length}
-                        itemSize={ROW_HEIGHT + ROW_GAP}
-                        width="100%"
-                        itemData={{ users, selectedUserIds, onClickUserRow }}
-                        itemKey={(index) => users[index].id} // Added to avoid user rows being re-rendered on selection
-                        innerElementType={RowsContainer}
-                    >
-                        {RowContainer}
-                    </List>
-                )}
-            </AutoSizer>
+            <div className="h-full">
+                <AutoSizer disableWidth>
+                    {({ height }) => (
+                        <List
+                            className="no-scrollbars"
+                            height={height}
+                            width="100%"
+                            itemCount={users.length}
+                            itemSize={ROW_HEIGHT + ROW_GAP}
+                            itemData={{
+                                users,
+                                selectedUserIds,
+                                onClickUserRow,
+                            }}
+                            itemKey={(index) => users[index].id}
+                            innerElementType={RowsContainer}
+                        >
+                            {RowContainer}
+                        </List>
+                    )}
+                </AutoSizer>
+            </div>
         </UserListContext.Provider>
     );
 };

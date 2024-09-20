@@ -6,9 +6,8 @@ const UserListHeader: React.FC<CheckboxProps> = ({ onChange, checked }) => {
         <div
             className="
             user-list-item
-            z-10 top-0 sticky 
-            pb-1
-            text-xs text-c-text-secondary font-medium tracking-[0.035em]
+            z-10 top-0 sticky
+            text-xs text-c-text-secondary font-medium
             bg-white"
         >
             <div className="min-w-16 gap-3 flex items-center">
