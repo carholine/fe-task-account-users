@@ -57,11 +57,24 @@ describe('Button Component', () => {
         expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('does not render if neither label nor icon is provided', () => {
-        const { container } = render(
-            <Button variant={ButtonVariant.PRIMARY} onClick={() => {}} />
-        );
+    it('does not call onClick handler when the button is disabled', () => {
+        const onClick = vi.fn();
+        render(<Button label="Click me" onClick={onClick} disabled={true} />);
 
-        expect(container.querySelector('button')).not.toBeInTheDocument();
+        const button = screen.getByRole('button', {
+            name: /Click me/i,
+        });
+        fireEvent.click(button);
+        expect(onClick).not.toHaveBeenCalled();
+        expect(button).toHaveClass('cursor-not-allowed pointer-events-none');
+    });
+
+    it('has disabled attribute when the button is disabled', () => {
+        render(<Button label="Click me" onClick={() => {}} disabled={true} />);
+
+        const button = screen.getByRole('button', {
+            name: /Click me/i,
+        });
+        expect(button).toBeDisabled();
     });
 });

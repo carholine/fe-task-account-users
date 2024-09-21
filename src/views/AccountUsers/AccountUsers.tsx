@@ -1,28 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUsers } from '../../api/users';
-import UsersActions from '../../components/UserActions/UserActions';
+import UsersActions from '../../components/UsersActions/UsersActions';
 import UserList from '../../components/UserList/UserList';
 import Header from '../../components/Header/Header';
-
-const QUERY_CACHE_STALE_TIME = 1000 * 60 * 5; // 5 minutes
-
-const useUsers = () => {
-    const {
-        data: users,
-        isLoading,
-        isError,
-    } = useQuery({
-        queryKey: ['users'],
-        queryFn: fetchUsers,
-        staleTime: QUERY_CACHE_STALE_TIME,
-    });
-
-    return { users, isLoading, isError };
-};
+import { useUsers } from './hooks/useUsers';
+import { useFilteredUsers } from './hooks/useFilteredUsers';
 
 const AccountUsers: React.FC = () => {
-    const { users, isLoading, isError } = useUsers();
+    const { users, isError, isLoading } = useUsers();
+    const { filteredUsers, handleSearchChange } = useFilteredUsers(
+        users,
+        isError,
+        isLoading
+    );
     const [selectedUserIds, setSelectedUserIds] = useState<Set<number>>(
         new Set()
     );
@@ -57,7 +46,8 @@ const AccountUsers: React.FC = () => {
         >
             <Header
                 className="h-[58px] pb-4 flex-shrink-0"
-                onSearchChange={() => console.log('Search')}
+                onSearchChange={handleSearchChange}
+                disabled={isLoading || isError}
             />
             <main
                 className="
@@ -71,15 +61,17 @@ const AccountUsers: React.FC = () => {
                     selectedCount={selectedUserIds.size}
                     onDeleteSelected={() => console.log('delete selected')}
                     onEditSelected={() => console.log('edit selected')}
+                    disabled={isLoading || isError}
                 />
                 <div className="flex-grow min-h-0">
                     <UserList
-                        users={users || []}
+                        users={filteredUsers || []}
                         selectedUserIds={selectedUserIds}
                         onClickUserRow={toggleUserSelect}
                         onCheckAllUsers={onCheckAllUsers}
-                        isLoading={isLoading}
+                        loading={isLoading}
                         error={isError}
+                        disabled={isLoading || isError}
                     />
                 </div>
             </main>

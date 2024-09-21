@@ -1,7 +1,11 @@
 import React from 'react';
 import Checkbox, { CheckboxProps } from '../Checkbox/Checkbox';
 
-const UserListHeader: React.FC<CheckboxProps> = ({ onChange, checked }) => {
+const UserListHeader: React.FC<CheckboxProps> = ({
+    onChange,
+    checked,
+    disabled = false,
+}) => {
     return (
         <div
             className="
@@ -12,7 +16,11 @@ const UserListHeader: React.FC<CheckboxProps> = ({ onChange, checked }) => {
             mb-1"
         >
             <div className="min-w-16 gap-3 flex items-center">
-                <Checkbox checked={checked} onChange={onChange} />
+                <Checkbox
+                    checked={checked}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
                 <div className="flex-1">User</div>
             </div>
             <div className="flex items-center justify-start">Permission</div>

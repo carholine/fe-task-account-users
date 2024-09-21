@@ -8,6 +8,7 @@ export interface UsersActionsProps {
     onEditSelected: () => void;
     onDeleteSelected: () => void;
     className?: string;
+    disabled?: boolean;
 }
 
 const UsersActions: React.FC<UsersActionsProps> = ({
@@ -15,6 +16,7 @@ const UsersActions: React.FC<UsersActionsProps> = ({
     onEditSelected,
     onDeleteSelected,
     className = '',
+    disabled = false,
 }) => {
     return (
         <div className={`p-4 flex items-center ${className}`}>
@@ -22,11 +24,16 @@ const UsersActions: React.FC<UsersActionsProps> = ({
                 {selectedCount || 0} users selected
             </span>
             <div className="flex gap-2">
-                <EditButton size={ButtonSize.SM} onClick={onEditSelected} />
+                <EditButton
+                    size={ButtonSize.SM}
+                    onClick={onEditSelected}
+                    disabled={disabled}
+                />
                 <DeleteButton
                     size={ButtonSize.SM}
                     onClick={onDeleteSelected}
                     compact={false}
+                    disabled={disabled}
                 />
             </div>
         </div>

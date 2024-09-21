@@ -18,10 +18,16 @@ const sizes: Record<ButtonSize, string> = {
     [ButtonSize.MD]: 'h-10',
 };
 
+const disabledStyles: string = `
+    opacity-50 cursor-not-allowed pointer-events-none
+    bg-gray-300 text-gray-500 border-gray-300
+`;
+
 interface ButtonBaseProps {
     variant?: ButtonVariant;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     size?: ButtonSize;
+    disabled?: boolean;
 }
 
 export type ButtonProps = (
@@ -36,18 +42,22 @@ const Button: React.FC<ButtonProps> = ({
     iconLeft: Icon,
     onClick,
     size = ButtonSize.MD,
+    disabled = false,
 }) => {
     if (!label && !Icon) return null;
+
     return (
         <button
-            onClick={onClick}
+            onClick={disabled ? undefined : onClick}
+            disabled={disabled}
             className={`
-                ${variantStyles[variant]} ${sizes[size]}
-                w-fit min-w-8 box-border flex items-center justify-center
-                rounded
-                font-medium text-sm 
-                transition duration-150 ease-in-out`}
+                ${variantStyles[variant]} ${sizes[size]} 
+                w-fit min-w-8 box-border flex items-center justify-center 
+                rounded font-medium text-sm transition duration-150 ease-in-out 
+                ${disabled ? disabledStyles : ''}
+            `}
             aria-label={label}
+            aria-disabled={disabled}
         >
             {!!Icon && (
                 <span className="flex items-center px-2">

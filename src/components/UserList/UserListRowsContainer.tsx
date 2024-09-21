@@ -4,16 +4,19 @@ import UserListHeader from '../UserListHeader/UserListHeader';
 interface UserListContextType {
     areAllUsersSelected: boolean;
     onCheckAllUsers: () => void;
+    disabled?: boolean;
 }
 
 interface RowsContainerProps {
     children: React.ReactNode;
     areAllUsersSelected?: boolean;
     onCheckAllUsers?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
 }
 
 export const UserListContext = React.createContext<UserListContextType>({
     areAllUsersSelected: false,
+    disabled: false,
     onCheckAllUsers: () => {},
 });
 
@@ -26,13 +29,14 @@ export const RowsContainer = React.forwardRef<
     HTMLDivElement,
     RowsContainerProps
 >(({ children, ...rest }, ref) => {
-    const { areAllUsersSelected, onCheckAllUsers } =
+    const { areAllUsersSelected, onCheckAllUsers, disabled } =
         React.useContext(UserListContext);
     return (
         <div ref={ref} {...rest}>
             <UserListHeader
                 checked={areAllUsersSelected}
                 onChange={onCheckAllUsers}
+                disabled={disabled}
             />
             {children}
         </div>

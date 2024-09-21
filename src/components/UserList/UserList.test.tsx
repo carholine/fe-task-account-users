@@ -50,7 +50,7 @@ describe('UserList component', () => {
                 selectedUserIds={new Set<number>()}
                 onClickUserRow={onClickUserRow}
                 onCheckAllUsers={onCheckAllUsers}
-                isLoading={true}
+                loading={true}
             />
         );
         expect(document.querySelector('.spinner')).toBeInTheDocument();

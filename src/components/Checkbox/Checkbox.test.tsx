@@ -34,4 +34,23 @@ describe('Checkbox Component', () => {
         expect(checkIcon).toBeInTheDocument();
         expect(checkIcon).toHaveClass('opacity-0');
     });
+
+    it('should not call onChange when the checkbox is disabled', () => {
+        const handleChange = vi.fn();
+        render(
+            <Checkbox checked={false} onChange={handleChange} disabled={true} />
+        );
+        const checkbox = screen.getByRole('checkbox');
+        fireEvent.click(checkbox);
+        expect(handleChange).not.toHaveBeenCalled();
+        expect(checkbox).toHaveClass('cursor-not-allowed');
+    });
+
+    it('should have disabled attribute when disabled prop is true', () => {
+        render(
+            <Checkbox checked={false} onChange={() => {}} disabled={true} />
+        );
+        const checkbox = screen.getByRole('checkbox');
+        expect(checkbox).toBeDisabled();
+    });
 });

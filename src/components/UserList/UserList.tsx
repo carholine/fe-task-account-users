@@ -7,9 +7,10 @@ import { RowContainer, RowContainerData } from './UserListRowContainer';
 import { RowsContainer, UserListContext } from './UserListRowsContainer';
 
 export type UserListProps = {
-    isLoading?: boolean;
+    loading?: boolean;
     error?: boolean;
     onCheckAllUsers: () => void;
+    disabled?: boolean;
 } & RowContainerData;
 
 const renderLoadingState = () => (
@@ -33,14 +34,15 @@ const renderEmptyState = () => (
 );
 
 const UserList: React.FC<UserListProps> = ({
-    isLoading = false,
+    loading = false,
     error = false,
     users,
     selectedUserIds,
     onClickUserRow,
     onCheckAllUsers,
+    disabled = false,
 }) => {
-    if (isLoading) return renderLoadingState();
+    if (loading) return renderLoadingState();
     if (error) return renderErrorState();
     if (users.length === 0) return renderEmptyState();
 
@@ -48,7 +50,7 @@ const UserList: React.FC<UserListProps> = ({
 
     return (
         <UserListContext.Provider
-            value={{ areAllUsersSelected, onCheckAllUsers }}
+            value={{ areAllUsersSelected, onCheckAllUsers, disabled }}
         >
             <AutoSizer disableWidth>
                 {({ height }) => (

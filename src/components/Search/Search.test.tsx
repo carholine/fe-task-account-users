@@ -71,4 +71,24 @@ describe('SearchInput Component', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith('new value');
     });
+
+    it('has disabled attribute when the disabled prop is true', () => {
+        const handleChange = vi.fn();
+
+        render(<Search onChange={handleChange} disabled={true} />);
+
+        const inputElement = screen.getByRole('searchbox');
+        expect(inputElement).toBeDisabled();
+    });
+
+    it('does not call onChange handler when the input is disabled', () => {
+        const handleChange = vi.fn();
+
+        render(<Search onChange={handleChange} disabled={true} />);
+
+        const inputElement = screen.getByRole('searchbox');
+        fireEvent.change(inputElement, { target: { value: 'new value' } });
+
+        expect(handleChange).not.toHaveBeenCalled();
+    });
 });

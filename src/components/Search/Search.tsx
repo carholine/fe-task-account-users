@@ -8,6 +8,7 @@ interface Props {
     onChange: (value: string) => void;
     ariaLabel?: string;
     className?: string;
+    disabled?: boolean;
 }
 
 const Search: React.FC<Props> = ({
@@ -17,9 +18,10 @@ const Search: React.FC<Props> = ({
     onChange,
     ariaLabel = 'Search',
     className = '',
+    disabled = false,
 }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(e.target.value);
+        if (!disabled) onChange(e.target.value);
     };
 
     return (
@@ -39,6 +41,7 @@ const Search: React.FC<Props> = ({
                     outline-transparent"
                 onChange={handleInputChange}
                 aria-label={ariaLabel}
+                disabled={disabled}
             />
             <SearchIcon
                 className="
