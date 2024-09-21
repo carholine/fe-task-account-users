@@ -7,15 +7,17 @@ export interface UsersActionsProps {
     selectedCount?: number;
     onEditSelected: () => void;
     onDeleteSelected: () => void;
+    className?: string;
 }
 
 const UsersActions: React.FC<UsersActionsProps> = ({
     selectedCount,
     onEditSelected,
     onDeleteSelected,
+    className = '',
 }) => {
     return (
-        <div className="p-4 flex items-center h-full">
+        <div className={`p-4 flex items-center ${className}`}>
             <span className="text-l font-medium pr-6 text-c-text-hover">
                 {selectedCount || 0} users selected
             </span>

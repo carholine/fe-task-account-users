@@ -5,6 +5,8 @@ import UsersActions from '../../components/UserActions/UserActions';
 import UserList from '../../components/UserList/UserList';
 import Header from '../../components/Header/Header';
 
+const QUERY_CACHE_STALE_TIME = 1000 * 60 * 5; // 5 minutes
+
 const useUsers = () => {
     const {
         data: users,
@@ -13,7 +15,7 @@ const useUsers = () => {
     } = useQuery({
         queryKey: ['users'],
         queryFn: fetchUsers,
-        staleTime: 1000 * 60 * 10, // 10 minutes
+        staleTime: QUERY_CACHE_STALE_TIME,
     });
 
     return { users, isLoading, isError };
@@ -47,19 +49,29 @@ const AccountUsers: React.FC = () => {
     }, [selectedUserIds.size, users]);
 
     return (
-        <div className="flex flex-col h-screen w-screen bg-c-bg-main p-8">
+        <div
+            className="
+            h-screen w-screen min-w-[450px] p-8
+            flex flex-col
+            bg-c-bg-main"
+        >
             <Header
-                className="h-[58px] flex-shrink-0 pb-4"
+                className="h-[58px] pb-4 flex-shrink-0"
                 onSearchChange={() => console.log('Search')}
             />
-            <main className="flex flex-col flex-grow min-h-0 rounded-lg bg-white px-4">
-                <div className="h-[80px] flex-shrink-0">
-                    <UsersActions
-                        selectedCount={selectedUserIds.size}
-                        onDeleteSelected={() => console.log('delete selected')}
-                        onEditSelected={() => console.log('edit selected')}
-                    />
-                </div>
+            <main
+                className="
+                min-h-0 px-4 pb-4
+                flex flex-col flex-grow
+                rounded-lg
+                bg-white"
+            >
+                <UsersActions
+                    className="h-[80px] flex-shrink-0"
+                    selectedCount={selectedUserIds.size}
+                    onDeleteSelected={() => console.log('delete selected')}
+                    onEditSelected={() => console.log('edit selected')}
+                />
                 <div className="flex-grow min-h-0">
                     <UserList
                         users={users || []}

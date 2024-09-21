@@ -35,7 +35,7 @@ const Search: React.FC<Props> = ({
                 className="
                     h-[40px] w-full p-2 pl-9
                     border rounded
-                    placeholder:text-sm placeholder:text-c-text-gray-50 placeholder:leading-[21px]
+                    placeholder:text-sm placeholder:text-c-gray-100 placeholder:leading-[21px]
                     outline-transparent"
                 onChange={handleInputChange}
                 aria-label={ariaLabel}
@@ -44,7 +44,7 @@ const Search: React.FC<Props> = ({
                 className="
                     absolute left-3 transform
                     top-1/2 -translate-y-1/2 
-                    text-gray-500 stroke-c-text-gray-50
+                    stroke-c-gray-100
                     pointer-events-none"
                 aria-hidden="true"
                 focusable="false"

@@ -28,7 +28,7 @@ const renderErrorState = () => (
 
 const renderEmptyState = () => (
     <div className="flex-1 flex items-center justify-center">
-        <p className="text-c-text-gray-50">No users</p>
+        <p className="text-c-gray-100">No users</p>
     </div>
 );
 
@@ -50,28 +50,26 @@ const UserList: React.FC<UserListProps> = ({
         <UserListContext.Provider
             value={{ areAllUsersSelected, onCheckAllUsers }}
         >
-            <div className="h-full">
-                <AutoSizer disableWidth>
-                    {({ height }) => (
-                        <List
-                            className="no-scrollbars"
-                            height={height}
-                            width="100%"
-                            itemCount={users.length}
-                            itemSize={ROW_HEIGHT + ROW_GAP}
-                            itemData={{
-                                users,
-                                selectedUserIds,
-                                onClickUserRow,
-                            }}
-                            itemKey={(index) => users[index].id}
-                            innerElementType={RowsContainer}
-                        >
-                            {RowContainer}
-                        </List>
-                    )}
-                </AutoSizer>
-            </div>
+            <AutoSizer disableWidth>
+                {({ height }) => (
+                    <List
+                        className="no-scrollbars"
+                        height={height}
+                        width="100%"
+                        itemCount={users.length}
+                        itemSize={ROW_HEIGHT + ROW_GAP}
+                        itemData={{
+                            users,
+                            selectedUserIds,
+                            onClickUserRow,
+                        }}
+                        itemKey={(index) => users[index].id}
+                        innerElementType={RowsContainer}
+                    >
+                        {RowContainer}
+                    </List>
+                )}
+            </AutoSizer>
         </UserListContext.Provider>
     );
 };

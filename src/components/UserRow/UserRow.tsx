@@ -82,7 +82,7 @@ const UserRow: React.FC<Props> = ({
     const renderActionsColumn = React.useMemo(
         () => (
             <div
-                className="flex items-center justify-end gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+                className="flex items-center justify-end gap-[3px] invisible group-hover:visible transition-opacity duration-150"
                 data-testid={dataTestIds?.actionsColumn}
             >
                 <EditButton

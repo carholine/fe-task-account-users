@@ -97,11 +97,11 @@ describe('UserRow Component', () => {
         const rowElement = screen.getByTestId('user-row');
 
         expect(actionsColumn).toBeInTheDocument();
-        expect(actionsColumn).toHaveClass('opacity-0');
+        expect(actionsColumn).toHaveClass('invisible');
 
         fireEvent.mouseOver(rowElement);
         setTimeout(() => {
-            expect(actionsColumn).toHaveClass('opacity-100');
+            expect(actionsColumn).toHaveClass('visible');
         }, 100); // CSS transition delay
     });
 });

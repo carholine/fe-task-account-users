@@ -5,12 +5,12 @@ const variantStyles: Record<ButtonVariant, string> = {
     [ButtonVariant.PRIMARY]:
         'bg-c-blue-100 text-white hover:bg-c-blue-200 active:bg-c-blue-300',
     [ButtonVariant.SECONDARY]:
-        'text-c-text-gray-100 bg-white shadow-xs border border-solid border-c-border hover:bg-gray-100 active:bg-gray-200',
+        'text-c-gray-200 bg-white shadow-xs border border-solid border-c-border hover:bg-gray-100 active:bg-gray-200',
 };
 
 const iconColors: Record<ButtonVariant, string> = {
     [ButtonVariant.PRIMARY]: 'stroke-white',
-    [ButtonVariant.SECONDARY]: 'stroke-c-text-gray-50',
+    [ButtonVariant.SECONDARY]: 'stroke-c-gray-100',
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -18,7 +18,7 @@ const sizes: Record<ButtonSize, string> = {
     [ButtonSize.MD]: 'h-10',
 };
 
-interface BaseProps {
+interface ButtonBaseProps {
     variant?: ButtonVariant;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     size?: ButtonSize;
@@ -28,7 +28,7 @@ export type ButtonProps = (
     | { iconLeft: React.FC<React.SVGProps<SVGSVGElement>>; label?: string }
     | { iconLeft?: React.FC<React.SVGProps<SVGSVGElement>>; label: string }
 ) &
-    BaseProps;
+    ButtonBaseProps;
 
 const Button: React.FC<ButtonProps> = ({
     variant = ButtonVariant.PRIMARY,

@@ -17,13 +17,25 @@ const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
                 type="checkbox"
                 checked={checked}
                 onChange={handleChange}
-                className="cursor-pointer h-4 w-4 rounded border border-c-gray-50 bg-white checked:bg-c-blue-100 checked:border-c-blue-100 transition duration-150 ease-in-out appearance-none"
+                className="
+                h-4 w-4
+                rounded border border-c-gray-50
+                bg-white
+                checked:bg-c-blue-100 checked:border-c-blue-100
+                transition duration-150 ease-in-out
+                cursor-pointer appearance-none"
                 aria-checked={checked}
                 aria-label="Checkbox"
                 role="checkbox"
             />
             <CheckIcon
-                className={`absolute inset-0 flex items-center justify-center pointer-events-none h-4 w-4 fill-white transition duration-150 ease-in-out ${checked ? 'opacity-100' : 'opacity-0'}`}
+                className={`
+                    h-4 w-4
+                    absolute inset-0 flex items-center justify-center
+                    fill-white
+                    ${checked ? 'opacity-100' : 'opacity-0'}
+                    transition duration-150 ease-in-out
+                    pointer-events-none`}
                 aria-hidden="true"
             />
         </div>

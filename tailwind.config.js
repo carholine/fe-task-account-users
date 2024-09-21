@@ -26,7 +26,9 @@ export default {
             300: '#2A388C'
           },
           gray: {
-            50: '#CBD5E0'
+            50: '#CBD5E0',
+            100: '#A0AEC0',
+            200: '#4A5568'
           },
           border: '#E2E8F0',
           badge: {
@@ -51,16 +53,11 @@ export default {
             primary: '#1A202C',
             secondary: '#718096',
             hover: '#2D3748',
-            gray: {
-              50: '#A0AEC0',
-              100: '#4A5568'
-            }
           },
           bg: {
             main: '#EDF2F7',
             gray: '#F7FAFC'
-          },
-          shadow: 'rgba(45, 55, 72, 0.08)'
+          }
         }
       },
     },
