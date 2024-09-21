@@ -4,18 +4,15 @@ import Search from '../Search/Search';
 
 interface HeaderProps {
     onSearchChange: (value: string) => void;
+    className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
+const Header: React.FC<HeaderProps> = ({ onSearchChange, className }) => {
     return (
-        <header className="flex items-center justify-between">
+        <header className={`flex items-center justify-between ${className}`}>
             <h1 className="text-xl font-medium">Account users</h1>
             <div className="flex items-center gap-3">
-                <Search
-                    onChange={onSearchChange}
-                    ariaLabel="Search users"
-                    className="w-[204px]"
-                />
+                <Search onChange={onSearchChange} ariaLabel="Search users" />
                 <Button
                     onClick={() => console.log('connect users')}
                     label="Connect users"

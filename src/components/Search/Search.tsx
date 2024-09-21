@@ -23,7 +23,7 @@ const Search: React.FC<Props> = ({
     };
 
     return (
-        <div className={`relative ${className}`}>
+        <div className={`relative w-[204px] ${className}`}>
             <label htmlFor={id} className="sr-only">
                 {ariaLabel}
             </label>

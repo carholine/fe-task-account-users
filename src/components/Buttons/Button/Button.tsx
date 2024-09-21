@@ -14,8 +14,8 @@ const iconColors: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-    [ButtonSize.SM]: 'h-8 px-1.5',
-    [ButtonSize.MD]: 'h-10 px-1',
+    [ButtonSize.SM]: 'h-8',
+    [ButtonSize.MD]: 'h-10',
 };
 
 interface BaseProps {
@@ -41,16 +41,25 @@ const Button: React.FC<ButtonProps> = ({
     return (
         <button
             onClick={onClick}
-            className={`${variantStyles[variant]} ${sizes[size]} box-border flex items-center justify-center w-fit rounded font-medium text-sm transition duration-150 ease-in-out min-w-8`}
+            className={`
+                ${variantStyles[variant]} ${sizes[size]}
+                w-fit min-w-8 box-border flex items-center justify-center
+                rounded
+                font-medium text-sm 
+                transition duration-150 ease-in-out`}
             aria-label={label}
         >
             {!!Icon && (
-                <Icon
-                    className={`h-4 w-4 ${iconColors[variant]}`}
-                    role="presentation"
-                />
+                <span className="flex items-center px-2">
+                    <Icon
+                        className={`h-4 ${iconColors[variant]}`}
+                        role="presentation"
+                    />
+                </span>
             )}
-            {label && <span className="px-2">{label}</span>}
+            {label && (
+                <span className={`${Icon ? 'pr-3' : 'px-3'}`}>{label}</span>
+            )}
         </button>
     );
 };

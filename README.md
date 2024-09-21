@@ -12,3 +12,4 @@ Missing from the design:
 - Loading, error and empty states are very simple at the moment, these could be improved. For example, it would be better to use Skeleton items for the users list instead of a spinner.
 - Texts are currently inside the .tsx files. In a bigger project, a library for localization could be used and texts would be in separate files. This way in the tests it would be also possible to use the text variables.
 - Search input style can be updated to match the overall theme better. For example the X button doesn't look great in all browsers.
+- Design didn't have a scrollbar, so it was removed in the implementation as well. It's not very good UX as it might not be obvious for the user that the list is scrollable, so it would be a good idea to return the scrollbar.

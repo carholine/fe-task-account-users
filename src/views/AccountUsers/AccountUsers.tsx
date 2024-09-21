@@ -25,7 +25,7 @@ const AccountUsers: React.FC = () => {
         new Set()
     );
 
-    const toggleUserId = useCallback((userId: number) => {
+    const toggleUserSelect = useCallback((userId: number) => {
         setSelectedUserIds((prevSelectedUserIds) => {
             const updatedSet = new Set(prevSelectedUserIds);
             if (updatedSet.has(userId)) {
@@ -48,11 +48,12 @@ const AccountUsers: React.FC = () => {
 
     return (
         <div className="flex flex-col h-screen w-screen bg-c-bg-main p-8">
-            <div className="h-[58px] flex-shrink-0">
-                <Header onSearchChange={() => console.log('Search')} />
-            </div>
+            <Header
+                className="h-[58px] flex-shrink-0 pb-4"
+                onSearchChange={() => console.log('Search')}
+            />
             <main className="flex flex-col flex-grow min-h-0 rounded-lg bg-white px-4">
-                <div className="h-[82px] flex-shrink-0">
+                <div className="h-[80px] flex-shrink-0">
                     <UsersActions
                         selectedCount={selectedUserIds.size}
                         onDeleteSelected={() => console.log('delete selected')}
@@ -63,7 +64,7 @@ const AccountUsers: React.FC = () => {
                     <UserList
                         users={users || []}
                         selectedUserIds={selectedUserIds}
-                        onClickUserRow={toggleUserId}
+                        onClickUserRow={toggleUserSelect}
                         onCheckAllUsers={onCheckAllUsers}
                         isLoading={isLoading}
                         error={isError}

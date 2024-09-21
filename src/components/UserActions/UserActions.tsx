@@ -16,9 +16,9 @@ const UsersActions: React.FC<UsersActionsProps> = ({
 }) => {
     return (
         <div className="p-4 flex items-center h-full">
-            <div className="text-l font-medium pr-6 text-c-text-hover">
+            <span className="text-l font-medium pr-6 text-c-text-hover">
                 {selectedCount || 0} users selected
-            </div>
+            </span>
             <div className="flex gap-2">
                 <EditButton size={ButtonSize.SM} onClick={onEditSelected} />
                 <DeleteButton
